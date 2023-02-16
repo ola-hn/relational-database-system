@@ -32,6 +32,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -40,6 +41,14 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -58,7 +67,22 @@
       <version>${junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-core</artifactId>
+          <version>4.3.7</version>
+      </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>6.1.25</version>
+    </dependency>
+
+
+
   </dependencies>
+
+
 
   <build>
     <plugins>

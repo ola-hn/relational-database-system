@@ -11,4 +11,10 @@ public class Table {
     this.name = name;
   }
 
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("I'm a table, my current name is ");
+    sb.append(name);
+    return sb.toString();
+  }
 }
