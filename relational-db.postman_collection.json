@@ -34,6 +34,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "localhost:8080/api/table/students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/table/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						"students"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

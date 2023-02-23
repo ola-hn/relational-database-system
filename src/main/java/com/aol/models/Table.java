@@ -21,4 +21,7 @@ public class Table {
     sb.append(columnNames);
     return sb.toString();
   }
+  public String getName(){
+    return name;
+  }
 }
