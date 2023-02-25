@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Table {
   private String name;
-  private List<Column> columns;
   private List<Column> columnNames;
   private List<Row> rows;
 

@@ -2,7 +2,6 @@ package com.aol.backend.controllers;
 
 
 
-import com.aol.models.Database;
 import com.aol.models.Table;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
@@ -36,5 +35,9 @@ public class TableController {
     else{
       context.response().setStatusCode(200).end(table.toString());
     }
+  }
+
+  public static void addToTable(RoutingContext context){
+
   }
 }
