@@ -11,9 +11,9 @@ public class MainVerticle extends AbstractVerticle {
   public void start(){
     Router router = Router.router(vertx);
     router.route().handler(BodyHandler.create());
-    TableController databaseController = new TableController(vertx);
-    router.get("/api/table/:name").handler(TableController::getTable);
-    router.post("/api/table/:name").handler(TableController::createTable);
+    TableController tableController = new TableController();
+    router.get("/api/table/:name").handler(tableController::getTable);
+    router.post("/api/table/:name").handler(tableController::createTable);
 
     vertx.createHttpServer().requestHandler(router).listen(8080);
   }
