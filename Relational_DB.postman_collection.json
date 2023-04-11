@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "944d0bcb-6e08-4028-8d57-a7a9dcae3c3d",
+		"name": "Relational_DB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21128614"
+	},
+	"item": [
+		{
+			"name": "table creation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"female_coaches\",\r\n    \"columns\":[\r\n    {\"name\":\"coach_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"coach_url\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"short_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"long_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"dob\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"nationality_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"nationality_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"face_url\",\r\n    \"type\":\"string\"}\r\n    ]\r\n    \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/table/:name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get table by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/table/female_coaches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						"female_coaches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert to table",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/table/insertTo/female_coaches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						"insertTo",
+						"female_coaches"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
