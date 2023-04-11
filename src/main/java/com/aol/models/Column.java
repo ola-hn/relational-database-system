@@ -1,5 +1,7 @@
 package com.aol.models;
 
+import java.lang.reflect.Type;
+
 public class Column {
   private String name;
   private String type;
@@ -7,6 +9,10 @@ public class Column {
   public Column(String name, String type) {
     this.name = name;
     this.type = type;
+  }
+
+  public String getType(){
+    return this.type;
   }
   public String toString(){
     StringBuilder sb = new StringBuilder();
