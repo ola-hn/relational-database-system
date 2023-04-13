@@ -14,6 +14,11 @@ public class Column {
   public String getType(){
     return this.type;
   }
+
+  public String getName() {
+    return name;
+  }
+
   public String toString(){
     StringBuilder sb = new StringBuilder();
     sb.append("COLUMN: name: ");

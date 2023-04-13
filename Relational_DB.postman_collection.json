@@ -90,6 +90,14 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "select query",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }

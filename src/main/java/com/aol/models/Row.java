@@ -15,6 +15,9 @@ public class Row {
   public void addCell(Cell c){
     this.cells.add(c);
   }
+  public Cell getCell(int index){
+    return cells.get(index);
+  }
 
   public String toString(){
     StringBuilder sb = new StringBuilder();

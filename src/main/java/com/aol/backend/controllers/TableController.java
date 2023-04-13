@@ -2,10 +2,7 @@ package com.aol.backend.controllers;
 
 
 
-import com.aol.models.Column;
-import com.aol.models.Database;
-import com.aol.models.Table;
-import com.aol.models.Row;
+import com.aol.models.*;
 import com.opencsv.exceptions.CsvValidationException;
 import io.vertx.ext.web.RoutingContext;
 
@@ -15,8 +12,8 @@ import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
 import com.opencsv.CSVReader;
-import static com.aol.backend.Utils.Utils.toTable;
-import static com.aol.backend.Utils.Utils.toRows;
+
+import static com.aol.backend.Utils.Utils.*;
 
 public class TableController {
   public void createTable(RoutingContext context){
@@ -26,6 +23,38 @@ public class TableController {
     Database database = Database.getInstance();
     database.addTable(tableName,table);
     context.response().setStatusCode(201).end(table.toString());
+  }
+
+  public Query createQuery(RoutingContext context){
+    String jsonQuery = context.getBodyAsString();
+    Query query = toQuery(jsonQuery);
+    //context.response().setStatusCode(201).end(query.toString());
+    return query;
+  }
+
+  public void selectQuery(RoutingContext context){
+    Database database = Database.getInstance();
+    Query query = createQuery(context);
+    StringBuilder sb = new StringBuilder();
+    sb.append(query.toString());
+    if(database.getTable(query.getTableName()) !=null){
+          if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
+            Table tab = database.getTable(query.getTableName());
+            List<Row> filteredRows= tab.getRowsByIndex(query.getColumnNames());
+
+            sb.append(query.getColumnNames());
+            sb.append("\n");
+            sb.append(tab.showRows(filteredRows));
+            context.response().setStatusCode(200).end(sb.toString());
+          }else{
+            sb.append("column not found");
+            context.response().setStatusCode(404).end(sb.toString());
+          }
+    }else{
+      sb.append("Table not found");
+      context.response().setStatusCode(404).end(sb.toString());
+    }
+
   }
 
   public void getTable(RoutingContext context){
@@ -65,7 +94,7 @@ public class TableController {
     if(csvData.size()>0){
       List <Row> rows = toRows(csvData,cols);
       table.setRows(rows);
-      context.response().setStatusCode(200).end(table.showRows());
+      context.response().setStatusCode(200).end(table.showRows(rows));
     }
 
   }

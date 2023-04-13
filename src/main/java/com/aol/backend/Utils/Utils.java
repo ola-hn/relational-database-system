@@ -1,9 +1,6 @@
 package com.aol.backend.Utils;
 
-import com.aol.models.Column;
-import com.aol.models.Table;
-import com.aol.models.Row;
-import com.aol.models.Cell;
+import com.aol.models.*;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -14,6 +11,10 @@ public class Utils {
   public static Table toTable(String jString){
     return new Gson().fromJson(jString, Table.class);
 
+  }
+
+  public static Query toQuery(String jString){
+    return new Gson().fromJson(jString, Query.class);
   }
 
   public static <T> Cell<T> getPrimitiveType(String columnType, String value){
