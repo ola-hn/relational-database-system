@@ -118,6 +118,9 @@ public class TableController {
       //line of file
       String[] row;
 
+      // skip row listing column names
+      reader.readNext();
+
       while ((row = reader.readNext()) != null) {
        csvData.add(row);
       }
