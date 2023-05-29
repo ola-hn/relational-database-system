@@ -7,10 +7,11 @@ public class Query {
   private String tableName;
   private List<String> columnNames = new ArrayList<>();
 
-  public Query(String tableName, List<String> columnNames){
+  private List<String> conditions = new ArrayList<>();
+  public Query(String tableName, List<String> columnNames, List<String> conditions){
     this.tableName = tableName;
     this.columnNames = columnNames;
-
+    this.conditions = conditions;
   }
 
   public String getTableName() {
@@ -19,6 +20,10 @@ public class Query {
 
   public List<String> getColumnNames() {
     return columnNames;
+  }
+
+  public List<String> getConditions(){
+    return conditions;
   }
 
   public String toString(){

@@ -38,6 +38,7 @@ public class Table {
     return rows;
   }
   public List<Column> getColumns(){return columns;}
+
   public int getColumnIndexByName(String name){
     for (Column col: columns) {
       if(col.getName().equalsIgnoreCase(name)){
@@ -48,6 +49,9 @@ public class Table {
   }
 
   public boolean tableContainsColumns(List<String> columnNames){
+    if(columnNames.get(0).equals("*")){
+      return true;
+    }
     for(String name: columnNames){
       if(getColumnIndexByName(name) == -1){
         return false;
@@ -55,8 +59,11 @@ public class Table {
     }
     return true;
   }
-  public List<Row> getRowsByIndex(List<String> columnsList){
+  public List<Row> getRowsByIndex(List<String> columnsList, List<Row> rows){
     List<Row> filteredRows = new ArrayList<>();
+    if(columnsList.get(0).equals("*")){
+      columnsList = getAllColumnNames();
+    }
     for(Row row : rows){
       Row filteredRow = new Row();
       for(String col : columnsList){
@@ -69,7 +76,106 @@ public class Table {
     return filteredRows;
   }
 
+
+
   public void setRows(List<Row> list){
     this.rows = list;
   }
+
+  public List<String> getAllColumnNames(){
+    List<String> columnsNames = new ArrayList<>();
+    for(Column col : columns){
+      columnsNames.add(col.getName());
+    }
+    return columnsNames;
+  }
+  public String getOperation(String condition){
+    if(condition.contains(">=")) return ">=";
+    if(condition.contains("<=")) return "<=";
+    if(condition.contains("!=")) return "!=";
+    if(condition.contains("=")) return "=";
+    if(condition.contains(">")) return ">";
+    if(condition.contains("<")) return "<";
+
+    return "=";
+  }
+
+  public List<Row> getRowsMatchingConditions(List<String> conditions){
+    List<Row> filteredRows = new ArrayList<>();
+    for(Row row : rows){
+      boolean match = true;
+     for(String condition : conditions){
+       if(condition.contains("AND") || !condition.contains("OR")){
+         if(!checkCondition(row,condition)){
+           match = false;
+           break;
+         }
+       }else if(condition.contains("OR")){
+         if(checkCondition(row,condition)){
+           match = true;
+           break;
+         }
+       }
+     }
+      if(match){
+        filteredRows.add(row);
+      }
+      }
+
+    return  filteredRows;
+  }
+
+
+  public String removeConnector(String condition){
+    if(condition.contains("AND")){
+      return condition.replace("AND","");
+    }
+    if(condition.contains("OR")){
+      return condition.replace("OR","");
+    }
+    return condition;
+  }
+
+  public boolean checkCondition(Row row,String condition){
+    condition = removeConnector(condition);
+    System.out.println(condition);
+    String operation = getOperation(condition);
+    String[] conditionParts = condition.split(operation);
+    String column = conditionParts[0].trim();
+    String value = conditionParts[1].trim();
+    System.out.println(column+operation+value);
+    int columnIndex = getColumnIndexByName(column);
+    Cell cell = row.getCell(columnIndex);
+    Column col = columns.get(columnIndex);
+    if(col.getType().equals("integer") || col.getType().equals("float")){
+      if(operation.equals("=")){
+        return  Float.parseFloat(cell.getValue().toString()) == Float.parseFloat(value);
+      }
+      if(operation.equals("<=")){
+        return  Float.parseFloat(cell.getValue().toString()) <= Float.parseFloat(value);
+      }
+      if(operation.equals("<")){
+        return  Float.parseFloat(cell.getValue().toString()) < Float.parseFloat(value);
+      }
+      if(operation.equals("!=")){
+        return  Float.parseFloat(cell.getValue().toString()) != Float.parseFloat(value);
+      }
+      if(operation.equals(">=")){
+        return  Float.parseFloat(cell.getValue().toString()) >= Float.parseFloat(value);
+      }
+      if(operation.equals(">")){
+        return  Float.parseFloat(cell.getValue().toString()) > Float.parseFloat(value);
+      }
+    }if(col.getType().equals("string")){
+      if(operation.equals("=")){
+        return cell.getValue().toString().equalsIgnoreCase(value);
+      }
+      if(operation.equals("!=")){
+        return !cell.getValue().toString().equalsIgnoreCase(value);
+      }
+    }
+    return true;
+  }
+
+
 }

@@ -40,7 +40,8 @@ public class TableController {
     if(database.getTable(query.getTableName()) !=null){
           if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
             Table tab = database.getTable(query.getTableName());
-            List<Row> filteredRows= tab.getRowsByIndex(query.getColumnNames());
+            List<Row> rowsList = tab.getRowsMatchingConditions(query.getConditions());
+            List<Row> filteredRows= tab.getRowsByIndex(query.getColumnNames(),rowsList);
 
             sb.append(query.getColumnNames());
             sb.append("\n");
@@ -81,6 +82,7 @@ public class TableController {
     List<String[]> csvData = new ArrayList<>();
 
     //read csv file
+    // don't forget about the first line that might contain the columns of the table
     try (CSVReader reader = new CSVReader(new StringReader(context.getBodyAsString()))) {
       //line of file
       String[] row;
