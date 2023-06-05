@@ -186,14 +186,12 @@ public boolean equalsRow(Row row1,Row row2){
     for(Row r : rows){
 
       Row newRow = r.removeLastCell();
-      //System.out.println("new row : "+ newRow + "my row : "+ row );
       if(equalsRow(newRow,row)){ return r ;}
 
 
     }
     return null;
   }
-
   public List<Row> filterRows(List<Row> rows, List<String> columns){
     List<Row> newRows = new ArrayList<>();
     for(Row row : rows){
