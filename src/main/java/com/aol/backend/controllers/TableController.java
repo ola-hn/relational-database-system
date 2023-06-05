@@ -36,18 +36,23 @@ public class TableController {
     Database database = Database.getInstance();
     Query query = createQuery(context);
     StringBuilder sb = new StringBuilder();
+    List<Row> filteredRows;
     sb.append(query.toString());
     if(database.getTable(query.getTableName()) !=null){
           if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
             Table tab = database.getTable(query.getTableName());
             List<Row> rowsList = tab.getRowsMatchingConditions(query.getConditions());
-            //List<Row> filteredRows= tab.getRowsByIndex(query.getGroupByColumns(),rowsList);
-            List<Row> groupedRows = tab.groupByCols(rowsList,query.getGroupByColumns(), query.getCount(), query.getSum());
 
+            if(query.getGroupByColumns().size()>0) {
+              filteredRows = tab.groupByCols(rowsList, query.getGroupByColumns(), query.getCount(), query.getSum());
+            }else{
+              filteredRows= tab.getRowsByIndex(query.getColumnNames(),rowsList);
+            }
 
+            sb.append("\n");
             sb.append(query.getColumnNames());
             sb.append("\n");
-            sb.append(tab.showRows(groupedRows));
+            sb.append(tab.showRows(filteredRows));
             context.response().setStatusCode(200).end(sb.toString());
           }else{
             sb.append("column not found");

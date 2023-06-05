@@ -49,8 +49,32 @@ public class Query {
     StringBuilder sb = new StringBuilder();
     sb.append("SELECT ");
     sb.append(columnNames);
+    if(!count.equals("")){
+      sb.append(" COUNT(");
+      sb.append(count);
+      sb.append(")");
+    }
+    if(!sum.equals("")){
+      sb.append(" SUM(");
+      sb.append(sum);
+      sb.append(")");
+    }
     sb.append("\n");
     sb.append(" FROM "+tableName);
+    sb.append("\n");
+    if(conditions.size()>0){
+      sb.append(" WHERE ");
+      sb.append(conditions);
+    }
+    if(groupByColumns.size()>0){
+      sb.append("\n");
+      sb.append(" GROUP BY ");
+      for(String col: groupByColumns){
+        sb.append(col);
+        sb.append(",");
+      }
+
+    }
     sb.append("\n");
     return sb.toString();
   }
