@@ -1,12 +1,22 @@
 package com.aol.models;
 
 import java.util.ArrayList;
+import com.aol.backend.Utils.Utils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.hazelcast.nio.ObjectDataInput;
+import com.hazelcast.nio.ObjectDataOutput;
+import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
+
+import java.io.IOException;
 import java.util.List;
 
-public class Table {
+public class Table implements IdentifiedDataSerializable {
   private String name;
   private List<Column> columns;
   private List<Row> rows;
+
+  public Table() {}
 
   public Table(String name,List<Column> columns) {
     this.name = name;
@@ -277,4 +287,31 @@ public boolean equalsRow(Row row1,Row row2){
   }
 
 
+  @Override
+  // TODO: manage id's
+  public int getFactoryId() {
+    return 1;
+  }
+
+  @Override
+  public int getClassId() {
+    return 123;
+  }
+
+  @Override
+  public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
+    // convert table to JSON
+    Gson gson = new GsonBuilder().create();
+    String json = gson.toJson(this);
+
+    objectDataOutput.writeString(json);
+  }
+
+  @Override
+  public void readData(ObjectDataInput objectDataInput) throws IOException {
+    Table table = Utils.toTable(objectDataInput.readString());
+    this.columns = table.getColumns();
+    this.rows = table.getRows();
+    this.name = table.getName();
+  }
 }
