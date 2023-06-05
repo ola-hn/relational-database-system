@@ -8,10 +8,17 @@ public class Query {
   private List<String> columnNames = new ArrayList<>();
 
   private List<String> conditions = new ArrayList<>();
-  public Query(String tableName, List<String> columnNames, List<String> conditions){
+
+  private List<String> groupByColumns = new ArrayList<>();
+  private String count ;
+  private String sum;
+  public Query(String tableName, List<String> columnNames, List<String> conditions, List<String> groupByColumns, String count, String sum){
     this.tableName = tableName;
     this.columnNames = columnNames;
     this.conditions = conditions;
+    this.groupByColumns = groupByColumns;
+    this.count = count;
+    this.sum = sum;
   }
 
   public String getTableName() {
@@ -24,6 +31,18 @@ public class Query {
 
   public List<String> getConditions(){
     return conditions;
+  }
+
+  public List<String> getGroupByColumns() {
+    return groupByColumns;
+  }
+
+  public String getCount() {
+    return count;
+  }
+
+  public String getSum() {
+    return sum;
   }
 
   public String toString(){

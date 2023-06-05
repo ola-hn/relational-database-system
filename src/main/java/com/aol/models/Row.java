@@ -18,6 +18,28 @@ public class Row {
   public Cell getCell(int index){
     return cells.get(index);
   }
+  public Row removeLastCell(){
+    int i = cells.size() - 1 ;
+   Row row = new Row();
+   for(int y = 0; y<cells.size()-1;y++){
+     Cell cell = getCell(y);
+     row.addCell(cell);
+   }
+   return row;
+  }
+
+  public void removeCell(int index){
+    cells.remove(index);
+  }
+
+  public Cell getLastCell(){
+    int i = cells.size() - 1 ;
+    return cells.get(i);
+  }
+
+  public List<Cell> getCells(){
+    return  cells;
+  }
 
   public String toString(){
     StringBuilder sb = new StringBuilder();

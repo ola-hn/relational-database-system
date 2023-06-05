@@ -125,7 +125,6 @@ public class Table {
     return  filteredRows;
   }
 
-
   public String removeConnector(String condition){
     if(condition.contains("AND")){
       return condition.replace("AND","");
@@ -138,12 +137,10 @@ public class Table {
 
   public boolean checkCondition(Row row,String condition){
     condition = removeConnector(condition);
-    System.out.println(condition);
     String operation = getOperation(condition);
     String[] conditionParts = condition.split(operation);
     String column = conditionParts[0].trim();
     String value = conditionParts[1].trim();
-    System.out.println(column+operation+value);
     int columnIndex = getColumnIndexByName(column);
     Cell cell = row.getCell(columnIndex);
     Column col = columns.get(columnIndex);
@@ -175,6 +172,87 @@ public class Table {
       }
     }
     return true;
+  }
+  //function to compare if row already exists except for last cell of the row
+public boolean equalsRow(Row row1,Row row2){
+
+    for(int i = 0; i< row1.getCells().size();i++){
+      if(!row1.getCell(i).getValue().toString().equals(row2.getCell(i).getValue().toString())) return false;
+    }
+    return true;
+}
+  public Row listContainsRow(List<Row> rows, Row row){
+   row = row.removeLastCell();
+    for(Row r : rows){
+
+      Row newRow = r.removeLastCell();
+      //System.out.println("new row : "+ newRow + "my row : "+ row );
+      if(equalsRow(newRow,row)){ return r ;}
+
+
+    }
+    return null;
+  }
+
+  public List<Row> filterRows(List<Row> rows, List<String> columns){
+    List<Row> newRows = new ArrayList<>();
+    for(Row row : rows){
+      Row newRow = new Row();
+      for(String col: columns){
+        int index = getColumnIndexByName(col);
+        Cell cell = row.getCell(index);
+        newRow.addCell(cell);
+      }
+      newRows.add(newRow);
+    }
+    return newRows;
+  }
+
+  public Row getSimilarRow(List<Row> rows, Row row){
+    for(Row r : rows){
+      r.removeLastCell();
+      if(r.equals(row)) return r;
+    }
+    return null;
+  }
+  //function to get the last cell of the row
+
+  public List<Row> groupByCols(List<Row> rows, List<String> columns, String count, String sum){
+
+    if(columns.size()>0){
+      //if(!count.equals("*")) columns.add(count);
+      if(!sum.equals("")) columns.add(sum);
+      List <Row> filteredRows = filterRows(rows,columns);
+      List <Row> groupedRows = new ArrayList<>();
+      for(Row row : filteredRows){
+        Row newRow = new Row(row.getCells());
+        if(sum.equals("")){
+        Cell cell = new Cell<>(1);
+        newRow.addCell(cell);}
+
+        //check if newRow exists in groupedRows
+        if(listContainsRow(groupedRows,newRow)!=null){
+          int oldValue = Integer.parseInt(listContainsRow(groupedRows,newRow).getLastCell().getValue().toString());
+          if(sum.equals("")){
+          oldValue++;
+          listContainsRow(groupedRows,newRow).getLastCell().setValue(oldValue);}
+          else{
+            int newValue =Integer.parseInt(newRow.getLastCell().getValue().toString());
+            newValue+=oldValue;
+            listContainsRow(groupedRows,newRow).getLastCell().setValue(newValue);
+          }
+        }
+        else{
+          groupedRows.add(newRow);
+        }
+      }
+      return groupedRows;
+    }
+    else{
+      return rows;
+    }
+
+
   }
 
 

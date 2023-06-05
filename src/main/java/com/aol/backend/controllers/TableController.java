@@ -41,11 +41,13 @@ public class TableController {
           if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
             Table tab = database.getTable(query.getTableName());
             List<Row> rowsList = tab.getRowsMatchingConditions(query.getConditions());
-            List<Row> filteredRows= tab.getRowsByIndex(query.getColumnNames(),rowsList);
+            //List<Row> filteredRows= tab.getRowsByIndex(query.getGroupByColumns(),rowsList);
+            List<Row> groupedRows = tab.groupByCols(rowsList,query.getGroupByColumns(), query.getCount(), query.getSum());
+
 
             sb.append(query.getColumnNames());
             sb.append("\n");
-            sb.append(tab.showRows(filteredRows));
+            sb.append(tab.showRows(groupedRows));
             context.response().setStatusCode(200).end(sb.toString());
           }else{
             sb.append("column not found");
