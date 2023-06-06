@@ -100,30 +100,30 @@ public class Table {
     return "=";
   }
 
-  public List<Row> getRowsMatchingConditions(List<String> conditions){
+  public List<Row> getRowsMatchingConditions(List<Row> inputRows, List<String> conditions) {
     List<Row> filteredRows = new ArrayList<>();
-    for(Row row : rows){
+    for(Row row : inputRows){
       boolean match = true;
-     for(String condition : conditions){
-       if(condition.contains("AND") || !condition.contains("OR")){
-         if(!checkCondition(row,condition)){
-           match = false;
-           break;
-         }
-       }else if(condition.contains("OR")){
-         if(checkCondition(row,condition)){
-           match = true;
-           break;
-         }
-       }
-     }
+      for(String condition : conditions){
+        if(condition.contains("AND") || !condition.contains("OR")){
+          if(!checkCondition(row,condition)){
+            match = false;
+            break;
+          }
+        } else if(condition.contains("OR")){
+          if(checkCondition(row,condition)){
+            match = true;
+            break;
+          }
+        }
+      }
       if(match){
         filteredRows.add(row);
       }
-      }
-
+    }
     return  filteredRows;
   }
+
 
   public String removeConnector(String condition){
     if(condition.contains("AND")){
@@ -251,6 +251,29 @@ public boolean equalsRow(Row row1,Row row2){
     }
 
 
+  }
+
+  public List<Row> innerJoin(Table joinTable, JoinCondition condition) {
+    List<Row> joinedRows = new ArrayList<>();
+
+    for (Row baseRow : rows) {
+      for (Row joinRow : joinTable.getRows()) {
+        if (satisfiesJoinCondition(baseRow, joinRow, condition)) {
+          Row joinedRow = baseRow.copy();
+          joinedRow.addCells(joinRow.getCells());
+          joinedRows.add(joinedRow);
+        }
+      }
+    }
+
+    return joinedRows;
+  }
+
+  private boolean satisfiesJoinCondition(Row baseRow, Row joinRow, JoinCondition condition) {
+    String baseColumnValue = baseRow.getCell(getColumnIndexByName(condition.getBaseColumn())).getValue().toString();
+    String joinColumnValue = joinRow.getCell(getColumnIndexByName(condition.getJoinColumn())).getValue().toString();
+
+    return baseColumnValue.equals(joinColumnValue);
   }
 
 
