@@ -87,8 +87,7 @@ public class TableController {
     }
   }
 
-
-
+  // TODO: show table contents upon get
   public void getTable(RoutingContext context){
     String tableName = context.pathParam("name");
     Database database = Database.getInstance();
