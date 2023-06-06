@@ -17,19 +17,24 @@ public class Utils {
     return new Gson().fromJson(jString, Query.class);
   }
 
-  public static <T> Cell<T> getPrimitiveType(String columnType, String value){
-    if(columnType.equalsIgnoreCase("integer")){
-      Cell<Integer> cell = new Cell<>(Integer.parseInt(value));
-      return (Cell<T>) cell;
+  public static <T> Cell<T> getPrimitiveType(String columnType, String value) {
+    try {
+      if (columnType.equalsIgnoreCase("integer")) {
+        Cell<Integer> cell = new Cell<>(Integer.parseInt(value));
+        return (Cell<T>) cell;
+      }
+      if (columnType.equalsIgnoreCase("float")) {
+        Cell<Float> cell = new Cell<>(Float.parseFloat(value));
+        return (Cell<T>) cell;
+      }
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
     }
-    if(columnType.equalsIgnoreCase("float")){
-      Cell<Float> cell = new Cell<>(Float.parseFloat(value));
-      return (Cell<T>) cell;
-    }else{
-      Cell<String> cell = new Cell<>(value);
-      return (Cell<T>) cell;
-    }
+
+    Cell<String> cell = new Cell<>(value);
+    return (Cell<T>) cell;
   }
+
 
   public static <T> Cell<T> getPrimitiveTypeForString(String str){
    if(str.matches("^-?\\d+$")){
