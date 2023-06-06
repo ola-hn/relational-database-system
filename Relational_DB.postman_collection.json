@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "944d0bcb-6e08-4028-8d57-a7a9dcae3c3d",
+		"_postman_id": "e103d4f0-944e-48bb-83da-b5199515ef74",
 		"name": "Relational_DB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21128614"
+		"_exporter_id": "22795800"
 	},
 	"item": [
 		{
-			"name": "table creation",
+			"name": "table creation female coaches",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -43,7 +43,43 @@
 			"response": []
 		},
 		{
-			"name": "get table by name",
+			"name": "table creation male coaches",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"female_coaches\",\r\n    \"columns\":[\r\n    {\"name\":\"coach_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"coach_url\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"short_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"long_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"dob\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"nationality_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"nationality_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"face_url\",\r\n    \"type\":\"string\"}\r\n    ]\r\n    \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/table/:name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get table by name female coache",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -64,7 +100,28 @@
 			"response": []
 		},
 		{
-			"name": "insert to table",
+			"name": "get table by name male coaches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/table/female_coaches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						"female_coaches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert to table female coaches",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -92,10 +149,94 @@
 			"response": []
 		},
 		{
-			"name": "select query",
+			"name": "insert to table male coaches",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/table/insertTo/female_coaches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"table",
+						"insertTo",
+						"female_coaches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "select query female coaches",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "select query female coaches inner join male coaches",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"query"
+					]
+				}
 			},
 			"response": []
 		}
