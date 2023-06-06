@@ -12,6 +12,8 @@ public class Query {
   private List<String> groupByColumns = new ArrayList<>();
   private String count ;
   private String sum;
+  private JoinTable joinTable;
+  private JoinCondition joinCondition;
   public Query(String tableName, List<String> columnNames, List<String> conditions, List<String> groupByColumns, String count, String sum){
     this.tableName = tableName;
     this.columnNames = columnNames;
@@ -62,6 +64,19 @@ public class Query {
     sb.append("\n");
     sb.append(" FROM "+tableName);
     sb.append("\n");
+    if (joinTable != null && joinCondition != null) {
+      sb.append("\n");
+      sb.append(" INNER JOIN ");
+      sb.append(joinTable.getTableName());
+      sb.append(" ON ");
+      sb.append(tableName);
+      sb.append(".");
+      sb.append(joinCondition.getBaseColumn());
+      sb.append(" = ");
+      sb.append(joinTable.getTableName());
+      sb.append(".");
+      sb.append(joinCondition.getJoinColumn());
+    }
     if(conditions.size()>0){
       sb.append(" WHERE ");
       sb.append(conditions);
@@ -77,5 +92,20 @@ public class Query {
     }
     sb.append("\n");
     return sb.toString();
+  }
+  public JoinTable getJoinTable() {
+    return joinTable;
+  }
+
+  public void setJoinTable(JoinTable joinTable) {
+    this.joinTable = joinTable;
+  }
+
+  public JoinCondition getJoinCondition() {
+    return joinCondition;
+  }
+
+  public void setJoinCondition(JoinCondition joinCondition) {
+    this.joinCondition = joinCondition;
   }
 }
