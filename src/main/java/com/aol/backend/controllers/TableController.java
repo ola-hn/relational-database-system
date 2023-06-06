@@ -62,7 +62,7 @@ public class TableController {
           sb.append("\n");
           sb.append(table1.showRows(filteredRows));
           context.response().setStatusCode(200).end(sb.toString());
-        } else {  
+        } else {
           List<Row> rowsList = table1.getRowsMatchingConditions(table1.getRows(), query.getConditions());
 
           if(query.getGroupByColumns().size()>0) {
@@ -130,7 +130,8 @@ public class TableController {
     if(csvData.size()>0){
       List <Row> rows = toRows(csvData,cols);
       table.setRows(rows);
-      context.response().setStatusCode(200).end(table.showRows(rows));
+      database.addTable(tableName, table);
+      context.response().setStatusCode(200).end(table.showRows(table.getRows()));
     }
 
   }

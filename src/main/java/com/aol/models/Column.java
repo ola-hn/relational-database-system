@@ -1,8 +1,9 @@
 package com.aol.models;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 
-public class Column {
+public class Column implements Serializable {
   private String name;
   private String type;
 

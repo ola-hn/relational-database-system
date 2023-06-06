@@ -314,4 +314,8 @@ public boolean equalsRow(Row row1,Row row2){
     this.rows = table.getRows();
     this.name = table.getName();
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }

@@ -1,9 +1,12 @@
 package com.aol.models;
 
+import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Row {
+public class Row implements Serializable {
   private List<Cell> cells;
 
   public Row(List<Cell> cells) {
@@ -53,7 +56,7 @@ public class Row {
   public Row copy() {
     Row copiedRow = new Row();
     for (Cell cell : cells) {
-      copiedRow.addCell(cell.copy()); 
+      copiedRow.addCell(cell.copy());
     }
     return copiedRow;
   }

@@ -1,6 +1,8 @@
 package com.aol.models;
 
-public class Cell<T> {
+import java.io.Serializable;
+
+public class Cell<T> implements Serializable {
   private T value;
 
   public Cell(T value) {
