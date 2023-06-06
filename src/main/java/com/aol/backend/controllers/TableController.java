@@ -39,31 +39,55 @@ public class TableController {
     List<Row> filteredRows;
     sb.append(query.toString());
     if(database.getTable(query.getTableName()) !=null){
-          if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
-            Table tab = database.getTable(query.getTableName());
-            List<Row> rowsList = tab.getRowsMatchingConditions(query.getConditions());
+      if(database.getTable(query.getTableName()).tableContainsColumns(query.getColumnNames())){
+        Table table1 = database.getTable(query.getTableName());
 
-            if(query.getGroupByColumns().size()>0) {
-              filteredRows = tab.groupByCols(rowsList, query.getGroupByColumns(), query.getCount(), query.getSum());
-            }else{
-              filteredRows= tab.getRowsByIndex(query.getColumnNames(),rowsList);
-            }
+        if(query.getJoinTable() != null && database.getTable(query.getJoinTable().getTableName()) != null
+          && database.getTable(query.getJoinTable().getTableName()).tableContainsColumns(query.getJoinTable().getColumnNames())){
 
-            sb.append("\n");
-            sb.append(query.getColumnNames());
-            sb.append("\n");
-            sb.append(tab.showRows(filteredRows));
-            context.response().setStatusCode(200).end(sb.toString());
+          Table table2 = database.getTable(query.getJoinTable().getTableName());
+
+          List<Row> joinedRows = table1.innerJoin(table2, query.getJoinCondition());
+
+          List<Row> rowsList = table1.getRowsMatchingConditions(joinedRows, query.getConditions());
+
+          if(query.getGroupByColumns().size()>0) {
+            filteredRows = table1.groupByCols(rowsList, query.getGroupByColumns(), query.getCount(), query.getSum());
           }else{
-            sb.append("column not found");
-            context.response().setStatusCode(404).end(sb.toString());
+            filteredRows= table1.getRowsByIndex(query.getColumnNames(),rowsList);
           }
+
+          sb.append("\n");
+          sb.append(query.getColumnNames());
+          sb.append("\n");
+          sb.append(table1.showRows(filteredRows));
+          context.response().setStatusCode(200).end(sb.toString());
+        } else {  
+          List<Row> rowsList = table1.getRowsMatchingConditions(table1.getRows(), query.getConditions());
+
+          if(query.getGroupByColumns().size()>0) {
+            filteredRows = table1.groupByCols(rowsList, query.getGroupByColumns(), query.getCount(), query.getSum());
+          }else{
+            filteredRows= table1.getRowsByIndex(query.getColumnNames(),rowsList);
+          }
+
+          sb.append("\n");
+          sb.append(query.getColumnNames());
+          sb.append("\n");
+          sb.append(table1.showRows(filteredRows));
+          context.response().setStatusCode(200).end(sb.toString());
+        }
+      }else{
+        sb.append("column not found");
+        context.response().setStatusCode(404).end(sb.toString());
+      }
     }else{
       sb.append("Table not found");
       context.response().setStatusCode(404).end(sb.toString());
     }
-
   }
+
+
 
   public void getTable(RoutingContext context){
     String tableName = context.pathParam("name");
