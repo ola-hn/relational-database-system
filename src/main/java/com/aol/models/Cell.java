@@ -18,4 +18,8 @@ public class Cell<T> {
     sb.append(value);
     return sb.toString();
   }
+
+  public Cell<T> copy() {
+      return new Cell<>(value);
+    }
 }

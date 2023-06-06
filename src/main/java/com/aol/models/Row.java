@@ -50,4 +50,15 @@ public class Row {
     sb.append("\n");
     return sb.toString();
   }
+  public Row copy() {
+    Row copiedRow = new Row();
+    for (Cell cell : cells) {
+      copiedRow.addCell(cell.copy()); 
+    }
+    return copiedRow;
+  }
+
+  public void addCells(List<Cell> cellsToAdd) {
+    cells.addAll(cellsToAdd);
+  }
 }
