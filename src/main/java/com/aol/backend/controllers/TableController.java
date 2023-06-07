@@ -25,6 +25,17 @@ public class TableController {
     context.response().setStatusCode(201).end("Table created successfully!\n\n"+table.toString());
   }
 
+  public void dropTable(RoutingContext context) {
+    String tableName = context.pathParam("name");
+    Database database = Database.getInstance();
+    if (database.getTable(tableName) == null) {
+      context.response().setStatusCode(202).end("Table not found");
+      return;
+    }
+    database.removeTable(tableName);
+    context.response().setStatusCode(202).end("Table dropped successfully!");
+  }
+
   public Query createQuery(RoutingContext context){
     String jsonQuery = context.getBodyAsString();
     Query query = toQuery(jsonQuery);

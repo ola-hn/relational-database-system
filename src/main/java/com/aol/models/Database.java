@@ -20,9 +20,14 @@ public class Database {
     return iTables.get(name);
   }
 
+  public void removeTable(String tableName) {
+    iTables.remove(tableName);
+    tables.remove(tableName);
+  }
+
   public void addTable(String tableName,Table table){
-    tables.put(tableName,table);
     iTables.put(tableName, table);
+    tables.put(tableName,table);
   }
 
   public static Database getInstance(){
