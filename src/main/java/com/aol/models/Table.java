@@ -90,7 +90,7 @@ public class Table implements IdentifiedDataSerializable {
 
 
   public void setRows(List<Row> list){
-    this.rows = list;
+    this.rows.addAll(list);
   }
 
   public List<String> getAllColumnNames(){
