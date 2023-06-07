@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "a2afaee6-49ee-4365-82ec-1a9eb42bc276",
+		"name": "aloData Queries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26103819"
+	},
+	"item": [
+		{
+			"name": "female_coaches",
+			"item": [
+				{
+					"name": "create table female_coaches",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"female_coaches\",\r\n    \"columns\":[\r\n    {\"name\":\"coach_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"coach_url\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"short_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"long_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"dob\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"nationality_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"nationality_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"face_url\",\r\n    \"type\":\"string\"}\r\n    ]\r\n    \r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/:name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get table by name female_coaches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/table/female_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"female_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert to table female_coaches first half",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/insertTo/female_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"insertTo",
+								"female_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert to table female_coaches second half",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/insertTo/female_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"insertTo",
+								"female_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert to table female_coaches empty csv file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/insertTo/female_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"insertTo",
+								"female_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select * from table female_coaches",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select from table female_coaches",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select inner join",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\",\r\n    \"joinTable\": {\r\n        \"tableName\" : \"male_coaches\",\r\n        \"columnNames\": [\"nationality_name\"]\r\n    },\r\n    \"joinCondition\" :{\r\n        \"baseColumn\":\"nationality_name\",\r\n        \"joinColumn\":\"nationality_name\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop table female_coaches",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/delete/female_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"delete",
+								"female_coaches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "male_coaches",
+			"item": [
+				{
+					"name": "create table male_coaches",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"male_coaches\",\r\n    \"columns\":[\r\n    {\"name\":\"coach_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"coach_url\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"short_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"long_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"dob\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"nationality_id\",\r\n    \"type\":\"integer\"},\r\n    {\"name\":\"nationality_name\",\r\n    \"type\":\"string\"},\r\n    {\"name\":\"face_url\",\r\n    \"type\":\"string\"}\r\n    ]\r\n    \r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/:name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get table by name male_coaches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/table/male_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"male_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert to table male_coaches",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/farez/Downloads/male_coaches.csv"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/insertTo/male_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"insertTo",
+								"male_coaches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select inner join",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableName\":\"male_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\",\r\n    \"joinTable\": {\r\n        \"tableName\" : \"female_coaches\",\r\n        \"columnNames\": [\"nationality_name\"]\r\n    },\r\n    \"joinCondition\" :{\r\n        \"baseColumn\":\"nationality_name\",\r\n        \"joinColumn\":\"nationality_name\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop table male_coaches",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/table/delete/male_coaches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"table",
+								"delete",
+								"male_coaches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "show tables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tables",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tables"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "drop tables",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tables/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tables",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
