@@ -74,7 +74,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": ""
+								"src": "/home/ola/female_coaches_first_half.csv"
 							}
 						},
 						"url": {
@@ -102,7 +102,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": ""
+								"src": "/home/ola/female_coaches_second_half.csv"
 							}
 						},
 						"url": {
@@ -130,7 +130,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": ""
+								"src": "/home/ola/empty.csv"
 							}
 						},
 						"url": {
@@ -160,7 +160,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[ \"nationality_id <= 45 OR\",\"nationality_name != France OR\",\"coach_id<=94451 \"],\r\n    \"groupByColumns\":[\"nationality_name\"],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"*\"   \r\n    ],\r\n    \"conditions\":[],\r\n    \"groupByColumns\":[],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -209,6 +209,35 @@
 							"path": [
 								"api",
 								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete from table female_coaches",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableName\":\"female_coaches\",\r\n    \"columnNames\":[    \r\n        \"nationality_name\"   \r\n    ],\r\n    \"conditions\":[\"coach_id=2079\"],\r\n    \"groupByColumns\":[],\r\n    \"count\":\"*\",\r\n    \"sum\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/deleteFromTable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"deleteFromTable"
 							]
 						}
 					},
@@ -347,7 +376,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": "/C:/Users/farez/Downloads/male_coaches.csv"
+								"src": "/home/ola/male_coaches.csv"
 							}
 						},
 						"url": {
