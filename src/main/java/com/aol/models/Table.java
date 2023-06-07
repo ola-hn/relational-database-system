@@ -25,10 +25,11 @@ public class Table implements IdentifiedDataSerializable {
 
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("I'm a table, my current name is ");
+    sb.append("TABLE: ");
     sb.append(name);
-    sb.append(" and the columns I'm comprised of are ");
+    sb.append("\n\nCOLUMNS\n");
     sb.append(columns);
+    sb.append("\n\n"+rows.size()+" rows");
     return sb.toString();
   }
 

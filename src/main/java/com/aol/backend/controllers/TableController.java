@@ -22,7 +22,7 @@ public class TableController {
     String tableName = table.getName();
     Database database = Database.getInstance();
     database.addTable(tableName,table);
-    context.response().setStatusCode(201).end(table.toString());
+    context.response().setStatusCode(201).end("Table created successfully!\n\n"+table.toString());
   }
 
   public Query createQuery(RoutingContext context){
@@ -87,7 +87,6 @@ public class TableController {
     }
   }
 
-  // TODO: show table contents upon get
   public void getTable(RoutingContext context){
     String tableName = context.pathParam("name");
     Database database = Database.getInstance();
