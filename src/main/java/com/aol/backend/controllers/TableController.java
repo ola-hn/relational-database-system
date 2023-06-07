@@ -117,7 +117,12 @@ public class TableController {
 
     //read csv file
     // don't forget about the first line that might contain the columns of the table
-    try (CSVReader reader = new CSVReader(new StringReader(context.getBodyAsString()))) {
+    String fileContent = context.getBodyAsString().trim();
+    if (fileContent.equals("")) {
+      context.response().setStatusCode(200).end("Insertion completed!\n\n"+table.showRows(table.getRows()));
+      return;
+    }
+    try (CSVReader reader = new CSVReader(new StringReader(fileContent))) {
       //line of file
       String[] row;
 
@@ -134,7 +139,7 @@ public class TableController {
       List <Row> rows = toRows(csvData,cols);
       table.setRows(rows);
       database.addTable(tableName, table);
-      context.response().setStatusCode(200).end(table.showRows(table.getRows()));
+      context.response().setStatusCode(200).end("Insertion completed!\n\n"+table.showRows(table.getRows()));
     }
 
   }
