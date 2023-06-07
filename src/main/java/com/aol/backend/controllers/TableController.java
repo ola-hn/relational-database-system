@@ -105,6 +105,11 @@ public class TableController {
     String tableName = context.pathParam("name");
     Database database = Database.getInstance();
     Table table = database.getTable(tableName);
+    if (table == null) {
+      context.response().setStatusCode(404).end("Table not found");
+      return;
+    }
+
     List <Column> cols = table.getColumns();
 
     //list of lines
