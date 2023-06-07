@@ -18,6 +18,7 @@ public class MainVerticle extends AbstractVerticle {
     router.post("/api/table/insertTo/:name").handler(tableController::insertToTable);
     router.get("/api/query").handler(tableController::selectQuery);
     router.delete("/api/table/delete/:name").handler(tableController::dropTable);
+    router.delete("/api/tables/delete").handler(tableController::dropTables);
 
     vertx.createHttpServer().requestHandler(router).listen(8080);
   }

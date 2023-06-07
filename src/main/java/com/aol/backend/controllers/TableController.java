@@ -142,6 +142,18 @@ public class TableController {
     context.response().setStatusCode(201).end(sb.toString());
   }
 
+  public void dropTables(RoutingContext context) {
+    Database database = Database.getInstance();
+    Collection<Table> tables = database.getTables();
+
+    if (tables.size() == 0) {
+      context.response().setStatusCode(201).end("Empty database");
+      return;
+    }
+    database.removeAllTables();
+    context.response().setStatusCode(201).end("All tables successfully dropped");
+  }
+
 
   public void insertToTable(RoutingContext context){
     //get table

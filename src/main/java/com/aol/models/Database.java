@@ -36,6 +36,10 @@ public class Database {
     return iTables.values();
   }
 
+  public void removeAllTables() {
+    iTables.clear();
+  }
+
   public static Database getInstance(){
     if(database ==null){
       database = new Database();
