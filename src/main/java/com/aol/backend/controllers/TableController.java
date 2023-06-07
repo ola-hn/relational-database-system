@@ -29,7 +29,7 @@ public class TableController {
       return;
     }
     database.addTable(tableName,table);
-    context.response().setStatusCode(201).end("Table created successfully!\n\n"+table.toString());
+    context.response().setStatusCode(201).end("Table successfully created!\n\n"+table.toString());
   }
 
   public void dropTable(RoutingContext context) {
@@ -40,7 +40,7 @@ public class TableController {
       return;
     }
     database.removeTable(tableName);
-    context.response().setStatusCode(202).end("Table dropped successfully!");
+    context.response().setStatusCode(202).end("Table successfully dropped!");
   }
 
   public Query createQuery(RoutingContext context){
