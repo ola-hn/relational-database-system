@@ -8,6 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
@@ -115,6 +116,30 @@ public class TableController {
     else{
       context.response().setStatusCode(200).end(table.toString());
     }
+  }
+
+  public void showTables(RoutingContext context) {
+    Database database = Database.getInstance();
+    Collection<Table> tables = database.getTables();
+
+    if (tables.size() == 0) {
+      context.response().setStatusCode(201).end("Empty database");
+      return;
+    }
+
+    StringBuilder sb = new StringBuilder();
+    int size = tables.size();
+    sb.append(size);
+    sb.append(" table");
+    if (size > 1)
+      sb.append("s");
+    sb.append("\n");
+
+    for (Table table: tables) {
+      sb.append(table.toString());
+      sb.append("\n\n");
+    }
+    context.response().setStatusCode(201).end(sb.toString());
   }
 
 

@@ -13,6 +13,7 @@ public class MainVerticle extends AbstractVerticle {
     router.route().handler(BodyHandler.create());
     TableController tableController = new TableController();
     router.get("/api/table/:name").handler(tableController::getTable);
+    router.get("/api/tables").handler(tableController::showTables);
     router.post("/api/table/:name").handler(tableController::createTable);
     router.post("/api/table/insertTo/:name").handler(tableController::insertToTable);
     router.get("/api/query").handler(tableController::selectQuery);
