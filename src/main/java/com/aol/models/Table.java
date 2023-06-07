@@ -14,7 +14,7 @@ import java.util.List;
 public class Table implements IdentifiedDataSerializable {
   private String name;
   private List<Column> columns;
-  private List<Row> rows;
+  private List<Row> rows = new ArrayList<>();
 
   public Table() {}
 

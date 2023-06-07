@@ -10,7 +10,6 @@ public class Utils {
 
   public static Table toTable(String jString){
     return new Gson().fromJson(jString, Table.class);
-
   }
 
   public static Query toQuery(String jString){
