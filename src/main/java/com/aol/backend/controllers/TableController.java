@@ -13,14 +13,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import com.opencsv.CSVReader;
 
+import javax.xml.crypto.Data;
+
 import static com.aol.backend.Utils.Utils.*;
 
 public class TableController {
   public void createTable(RoutingContext context){
+    String name = context.pathParam("name");
     String jsonTable = context.getBodyAsString();
     Table table = toTable(jsonTable);
     String tableName = table.getName();
     Database database = Database.getInstance();
+    if (database.getTable(tableName) != null) {
+      context.response().setStatusCode(201).end("Table already exists!\n\n"+ database.getTable(tableName).toString());
+      return;
+    }
     database.addTable(tableName,table);
     context.response().setStatusCode(201).end("Table created successfully!\n\n"+table.toString());
   }
