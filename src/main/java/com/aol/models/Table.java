@@ -319,4 +319,8 @@ public boolean equalsRow(Row row1,Row row2){
   public void setName(String name) {
     this.name = name;
   }
+
+  public void removeRows(List<Row> rows) {
+    this.rows.removeAll(rows);
+  }
 }

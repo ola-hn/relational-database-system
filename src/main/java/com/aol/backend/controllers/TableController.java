@@ -106,6 +106,28 @@ public class TableController {
     }
   }
 
+  public void deleteFromTable(RoutingContext context){
+    Database database = Database.getInstance();
+    Query query = createQuery(context);
+    Table table = database.getTable(query.getTableName());
+
+    if (table == null) {
+      context.response().setStatusCode(404).end("Table not found");
+      return;
+    }
+
+    List<String> columnNames = query.getColumnNames();
+    if (!table.tableContainsColumns(columnNames)) {
+      context.response().setStatusCode(404).end("Column not found");
+      return;
+    }
+    List<Row> rowsList = table.getRowsMatchingConditions(table.getRows(), query.getConditions());
+    table.removeRows(rowsList);
+    database.addTable(table.getName(), table);
+
+    context.response().setStatusCode(200).end("Successfully deleted from table!");
+  }
+
   public void getTable(RoutingContext context){
     String tableName = context.pathParam("name");
     Database database = Database.getInstance();
