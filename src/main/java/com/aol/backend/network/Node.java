@@ -55,9 +55,6 @@ public class Node {
         });
 
       } else {
-          if (clusterManager.getNodes().size() == 1)
-            System.err.println("Failed to create cluster: " + res.cause());
-          else
             System.out.println("Failed to join cluster!");
       }
     });
