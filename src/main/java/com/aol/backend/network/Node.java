@@ -14,8 +14,6 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 public class Node {
   private static HazelcastClusterManager clusterManager = new HazelcastClusterManager();
   public static void main(String[] args) {
-    //TODO: listen for new memberships and messages...
-
     Config hazelcastConfig = new Config();
     SerializationConfig serializationConfig = hazelcastConfig.getSerializationConfig();
     serializationConfig.addDataSerializableFactory(1, new TableSerializableFactory());
@@ -55,9 +53,6 @@ public class Node {
         });
 
       } else {
-          if (clusterManager.getNodes().size() == 1)
-            System.err.println("Failed to create cluster: " + res.cause());
-          else
             System.out.println("Failed to join cluster!");
       }
     });
