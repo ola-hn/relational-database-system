@@ -13,6 +13,7 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
 public class Node {
   private static HazelcastClusterManager clusterManager = new HazelcastClusterManager();
+  private static HazelcastInstance hazelcastInstance;
   public static void main(String[] args) {
     //TODO: listen for new memberships and messages...
 
@@ -64,6 +65,10 @@ public class Node {
   }
 
   public static HazelcastInstance getHazelcastInstance() {
-    return clusterManager.getHazelcastInstance();
+    return hazelcastInstance;
+  }
+
+  public static void setHazelcastInstance(HazelcastInstance instance) {
+    hazelcastInstance = instance;
   }
 }
