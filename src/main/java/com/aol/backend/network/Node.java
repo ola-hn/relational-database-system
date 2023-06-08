@@ -14,8 +14,6 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 public class Node {
   private static HazelcastClusterManager clusterManager = new HazelcastClusterManager();
   public static void main(String[] args) {
-    //TODO: listen for new memberships and messages...
-
     Config hazelcastConfig = new Config();
     SerializationConfig serializationConfig = hazelcastConfig.getSerializationConfig();
     serializationConfig.addDataSerializableFactory(1, new TableSerializableFactory());
